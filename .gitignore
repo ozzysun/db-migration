@@ -1,4 +1,5 @@
 /node_modules
+/hosts
 /conf
 *.log
 /testsample

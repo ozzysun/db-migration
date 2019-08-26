@@ -1,5 +1,5 @@
 const { rootResolve, rootRequire, sinon } = require('../tool')
-const { readFile, writeFile, loadFolderFiles, isFileExist, readYAML, writeYAML, readJSON, writeJSON, copyFolder, removeFolder } = rootRequire('src/utils/file')
+const { readFile, writeFile, loadFolderFiles, isFileExist, readYAML, writeYAML, readJSON, writeJSON, copyFolder, removeFolder } = rootRequire('src/core/utils/file')
 describe('[utils/file] file 功能', () => {
   it('1.1 檔案是否存在(isFileExist):存在=true', async() => {
     const filePath = rootResolve('testsample/sample.yml')

@@ -1,17 +1,18 @@
 const gulp = require('gulp')
 const path = require('path')
 const shell = require('shelljs')
-const { readYAML, copyFolder, removeFolder } = require('../../src/utils/file')
-const { createConfFolder, createMigration } = require('../../src/utils/project')
-const { getArgs } = require('../utils/common')
+const { copyFolder, removeFolder } = require('../../src/core/utils/file')
+const { createConfFolder } = require('../../src/app')
 gulp.task('default', async() => {
-  await run()
+  // 若連/conf 都不存在 則透過setting 產生
+  await createConfFolder()
+  await shell.exec('npm run start')
 })
 // 初次使用需先建立conf目錄
 gulp.task('init', async() => {
   // 若conf不存在 則產生
   const isNewConf = await createConfFolder()
-  if (isNewConf) return
+  console.log(`init =${isNewConf}`)
 })
 // 執行單元測試
 gulp.task('test', async() => {
@@ -22,14 +23,3 @@ gulp.task('test', async() => {
   await copyFolder(sourcePath, targetPath)
   await shell.exec('npm run test:unit')
 })
-const run = async() => {
-  // 1.若conf不存在 則產生
-  const isNewConf = await createConfFolder()
-  if (isNewConf) return
-  // 2.取得參數
-  const args = getArgs()
-  if (args === null) return
-  // 3.建立migration
-  const isNewDb = await createMigration(args.host, args.db, args.table)
-}
-

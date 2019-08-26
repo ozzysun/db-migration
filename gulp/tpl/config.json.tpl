@@ -2,7 +2,7 @@
   "development": {
     "username": "<%=user%>",
     "password": "<%=password%>",
-    "database": "database_development",
+    "database": "<%=database%>",
     "host": "<%=host%>",
     "port": "<%=port%>",
     "dialect": "<%=dbType%>"
@@ -10,7 +10,7 @@
   "test": {
     "username": "<%=user%>",
     "password": "<%=password%>",
-    "database": "database_test",
+    "database": "<%=database%>",
     "host": "<%=host%>",
     "port": "<%=port%>",
     "dialect": "<%=dbType%>"
@@ -18,7 +18,7 @@
   "production": {
     "username": "<%=user%>",
     "password": "<%=password%>",
-    "database": "database_production",
+    "database": "<%=database%>",
     "host": "<%=host%>",
     "port": "<%=port%>",
     "dialect": "<%=dbType%>"
