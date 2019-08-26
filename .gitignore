@@ -1,0 +1,5 @@
+/node_modules
+/conf
+*.log
+/testsample
+/.nyc_output
