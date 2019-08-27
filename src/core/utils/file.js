@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const jsonfile = require('jsonfile')
 const yaml = require('js-yaml')
 const path = require('path')
+const _ = require('lodash')
 // -- File ---------
 const isFileExist = async(filePath) => {
   return new Promise((resolve, reject) => {
@@ -66,6 +67,17 @@ const loadFolderFiles = async(folderPath, ext = null, type = 'default') => {
       }
     })
   })
+}
+const writeFileFromTpl = async(tplPath, targetPath, data, trim = false) => {
+  const tpl = await readFile(tplPath)
+  const compiled = _.template(tpl)
+  let compiledData = compiled(data)
+  compiledData = _.trim(compiledData)
+  // 無法消除空白行 先全部清除
+  if (trim) compiledData = compiledData.replace(/\r|\n|\s/g, '')
+  // console.log(compiledData)
+  const result = await writeFile(targetPath, compiledData)
+  return result
 }
 // -- Folder ----
 const copyFolder = async(sourcePath, targetPath) => {
@@ -142,7 +154,7 @@ const writeYAML = async(filePath, jsonObj = null) => {
   })
 }
 module.exports = {
-  readFile, writeFile, isFileExist, loadFolderFiles,
+  readFile, writeFile, isFileExist, loadFolderFiles, writeFileFromTpl,
   copyFolder, removeFolder,
   readJSON, writeJSON,
   readYAML, writeYAML

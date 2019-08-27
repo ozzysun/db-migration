@@ -1,6 +1,6 @@
 ## db-migration 說明
 ### 功能
-* 多主機 多db migration管理
+* 透過API維護多主機,多db migration管理
 ### 安裝
 * 安裝global工具
   npm install mocha gulp
@@ -8,6 +8,8 @@
 ### 開發指令
 * gulp
   執行src/index express 服務啟動
+* gulp test
+  單元測試
 ### 設定檔
 * hosts.yml 設定db主機資訊
 ### 規格
@@ -31,10 +33,14 @@
    - url: http://localhost:3138/migration/:host/:db/:table/update
    - method: get
    - 參數 params
-3. 回復table migration
+3. 執行異動 migration
+   - url: http://localhost:3138/migration/:host/:db/:table/run
+   - method: get
+4. 回復table migration
    - url: http://localhost:3138/migration/:host/:db/:table/undo
    - method: get
    - 參數 params
-4. 執行異動 migration
-   - url: http://localhost:3138/migration/:host/:db/:table/run
+5. 完全回復table migration
+   - url: http://localhost:3138/migration/:host/:db/:table/undoall
    - method: get
+   - 參數 params
