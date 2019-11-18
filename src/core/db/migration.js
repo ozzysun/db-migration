@@ -67,7 +67,10 @@ const runMigration = async(host, db, table) => {
   // 執行migration
   const workPath = path.resolve(`./hosts/${host}/${db}`)
   const cmdStr = `sequelize db:migrate`
-  const resultArray = await cmd(workPath, cmdStr)
+  const resultArray = await cmd(workPath, cmdStr).catch(e => {
+    console.log('catch err')
+    console.log(e)
+  })
   return resultArray
 }
 // 執行回復
@@ -94,16 +97,16 @@ const modifyColumns = (columns) => {
   columns.forEach(column => {
     const obj = {}
     for (const prop in column) {
-      const propIndex = lowcaseProp.indexOf(prop)
+      const propIndex = lowcaseProp.indexOf(prop.toLowerCase())
       if (propIndex !== -1) {
-        if (prop === 'type') {
+        if (prop.toLowerCase() === 'type') {
           obj[allowProp[propIndex]] = `Sequelize.${column[prop]}`
         } else {
           obj[allowProp[propIndex]] = column[prop]
         }
       }
-      newColumns.push(obj)
     }
+    newColumns.push(obj)
   })
   return newColumns
 }
