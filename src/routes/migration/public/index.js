@@ -8,12 +8,14 @@ class Route extends RouteClass {
     this.get('hello', (req, res) => {
       this.json(res, req.config)
     })
-    this.get(':host/:db/:table/:action', async(req, res) => {
+    this.post(':host/:db/:table/:action', async(req, res) => {
       const host = req.params.host
       const db = req.params.db
       const table = req.params.table
       const action = req.params.action
       let columns = req.body.columns
+      if (typeof columns === 'string') columns = JSON.parse(columns)
+      /*
       columns = [{
         columnName: 'hello',
         type: 'INTEGER(11)',
@@ -21,21 +23,22 @@ class Route extends RouteClass {
         primaryKey: true,
         autoIncrement: true
       }]
+      */
       let resultArray = []
       switch (action) {
-        case 'create':
+        case 'create': // 建立migration file
           resultArray = await createTableMigration(host, db, table, columns)
           break
-        case 'update':
+        case 'update': // 更新migragrion file
           resultArray = await undateTableMigration(host, db, table, columns)
           break
-        case 'run':
+        case 'run': // 依照migration file 執行更新db
           resultArray = await runMigration(host, db, table)
           break
-        case 'undo':
+        case 'undo': // roll back 到上一個異動
           resultArray = await undoMigration(host, db, table)
           break
-        case 'undoall':
+        case 'undoall': // roll back 到最初狀態
           resultArray = await undoMigration(host, db, table, true)
           break
       }

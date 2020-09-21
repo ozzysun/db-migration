@@ -13,21 +13,6 @@ module.exports = {
           enable: true,
           port: 3139
         },
-        cache: {
-          enable: false,
-          type: 'memcached',
-          server: '127.0.0.1',
-          port: 11211,
-          expSec: 0
-        },
-        ssl: {
-          enable: false,
-          port: 443,
-          key: './server.key',
-          cert: './server.crt',
-          requestCert: false,
-          rejectUnauthorized: false
-        },
         jwt: {
           default: {
             secret: 'Mojava3',
@@ -58,6 +43,13 @@ module.exports = {
         dir: 'routes/sample',
         ns: 'sample',
         common: 'sample api',
+        enable: true
+      },
+      {
+        id: 'migration',
+        dir: 'routes/migration',
+        ns: 'migration',
+        common: 'migration api',
         enable: true
       }]
     }

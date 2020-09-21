@@ -1,0 +1,6 @@
+2020 09/21
+1.移除graphql
+2.預設加入migration route
+3.create db不存在 自動產生
+4.加入postman測試sample
+5.post 支援raw

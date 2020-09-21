@@ -27,7 +27,31 @@ class RouteClass {
     uri = uri.indexOf('/') === 0 ? `/${this.ns}${uri}` : `/${this.ns}/${uri}`
     if (this.urlObj[method] === undefined) this.urlObj[method] = []
     this.urlObj[method].push(uri)
-    this.app[method](uri, callback)
+    if (method === 'post') {
+      this.app[method](uri, (req, res, next) => {
+        let isEmptyBody = true
+        for (const prop in req.body) {
+          isEmptyBody = false
+        }
+        if (isEmptyBody) {
+          // raw data
+          let data = ''
+          req.setEncoding('utf8')
+          req.on('data', (chunk) => {
+            data += chunk
+          })
+          req.on('end', () => {
+            req.body = data
+            req.body = JSON.parse(data)
+            callback(req, res, next)
+          })
+        } else {
+          callback(req, res, next)
+        }
+      })
+    } else {
+      this.app[method](uri, callback)
+    }
   }
   json(res, data, debugInfo = null) {
     // JSON API Spec

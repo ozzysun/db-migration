@@ -27,20 +27,40 @@
 ### 透過API操作db migration
 1. 建立table migration
    - url: http://localhost:3138/migration/:host/:db/:table/create
-   - method: get
+   - method: post
    - 參數 params
 2. 異動table migration
    - url: http://localhost:3138/migration/:host/:db/:table/update
-   - method: get
+   - method: post
    - 參數 params
 3. 執行異動 migration
    - url: http://localhost:3138/migration/:host/:db/:table/run
-   - method: get
+   - method: post
 4. 回復table migration
    - url: http://localhost:3138/migration/:host/:db/:table/undo
-   - method: get
+   - method: post
    - 參數 params
 5. 完全回復table migration
    - url: http://localhost:3138/migration/:host/:db/:table/undoall
-   - method: get
+   - method: post
    - 參數 params
+6 columns欄位設定
+   - type參照: https://sequelize.org/v5/manual/data-types.html
+   - sample: 
+      '{
+         columns: [
+            {
+               columnName: 'id',
+               type: 'INTEGER(11)',
+               allowNull: false,
+               primaryKey: true,
+               autoIncrement: true
+            },
+            {
+               columnName: 'name',
+               type: 'STRING',
+               allowNull: true,
+               primaryKey: false
+            }
+         ]
+      }'

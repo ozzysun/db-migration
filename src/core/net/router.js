@@ -9,7 +9,6 @@ const ip = require('ip')
 const { loadFolderFiles } = require('../utils/file')
 const beforeAfter = require('./beforeAfter')
 const jwt = require('./jwt')
-const { useGraphql } = require(`../../graphql`)
 const OZSocket = require('./socket')
 const session = require('express-session')
 const getRouter = async(port, staticPath = './public') => {
@@ -57,13 +56,11 @@ const createAPIServer = (apiPort = 3138, staticPath = './public') => {
   // -- add ping
   app.use(health.ping())
   app.use('/', router)
-  // graphql
-  useGraphql(router)
   // -- router setting ------
   router.use(beforeAfter)
   router.use(jwt)
   const server = app.listen(apiPort, () => {
-    console.log(`oz api Start:${ip.address()}:${apiPort} or use graphql@ ${ip.address()}:${apiPort}/graphql ...ctr+c to stop service`)
+    console.log(`oz api Start:${ip.address()}:${apiPort} ...ctr+c to stop service`)
   })
   return { router, app, server }
 }

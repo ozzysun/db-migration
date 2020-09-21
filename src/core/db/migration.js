@@ -2,6 +2,7 @@ const path = require('path')
 const { isFileExist, copyFolder, readYAML, writeFileFromTpl } = require('../utils/file')
 const { cmd } = require('../utils/cmd')
 const moment = require('moment')
+const { createDb } = require('./mysql')
 // 檢查並建立sequelize目錄
 const createDbFolder = async(host, db, dbConfig) => {
   const sourcePath = path.resolve('./gulp/tpl/db')
@@ -64,6 +65,8 @@ const updateTableMigration = async(host, db, table, columns) => {
 }
 // 執行 migration
 const runMigration = async(host, db, table) => {
+  // 檢查db 是否存在 不存在自動產生
+  await createDb(host, db)
   // 執行migration
   const workPath = path.resolve(`./hosts/${host}/${db}`)
   const cmdStr = `sequelize db:migrate`
