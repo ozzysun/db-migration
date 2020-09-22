@@ -42,7 +42,7 @@ class RouteClass {
           })
           req.on('end', () => {
             req.body = data
-            req.body = JSON.parse(data)
+            if (data !== '') req.body = JSON.parse(data)
             callback(req, res, next)
           })
         } else {

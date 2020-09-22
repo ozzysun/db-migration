@@ -14,7 +14,7 @@ class Route extends RouteClass {
       const table = req.params.table
       const action = req.params.action
       let columns = req.body.columns
-      if (typeof columns === 'string') columns = JSON.parse(columns)
+      if (columns !== undefined && typeof columns === 'string') columns = JSON.parse(columns)
       /*
       columns = [{
         columnName: 'hello',
