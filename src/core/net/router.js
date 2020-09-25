@@ -11,6 +11,7 @@ const beforeAfter = require('./beforeAfter')
 const jwt = require('./jwt')
 const OZSocket = require('./socket')
 const session = require('express-session')
+const path = require('path')
 const getRouter = async(port, staticPath = './public') => {
   try {
     // 產生express app 與router, server
@@ -42,6 +43,8 @@ const createAPIServer = (apiPort = 3138, staticPath = './public') => {
   app.use(multer().array()) // 接收 post form-data與檔案 TODO:要用.array()才有效
   // 設定靜態網頁路徑
   app.use('/static', express.static(staticPath))
+  // 維護網站網頁ui
+  app.use('/', express.static(path.resolve('www')))
   // 使用session
   app.use(session({
     secret: 'oz',
@@ -49,7 +52,6 @@ const createAPIServer = (apiPort = 3138, staticPath = './public') => {
     saveUninitialized: true,
     cookie: { secure: false }
   }))
-  // app.use('/', express.static(path.resolve('www')))
   // --underscore template--
   app.set('view engine', 'html')
   app.engine('html', lodash)
