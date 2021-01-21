@@ -53,6 +53,6 @@
     "sequelize-auto": "github:ozzysun/sequelize-auto",
     "sequelize-cli": "^5.5.0",
     "shelljs": "^0.8.3",
-    "socket.io": "^2.2.0"
+    "socket.io": "^2.4.0"
   }
 }
