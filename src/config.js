@@ -42,10 +42,6 @@ const createConfFolder = async(setting = null) => {
   }
 }
 const getArgs = () => {
-  // mq args
-  const hostId = argv.host || argv.h || null
-  const channelId = argv.cannel || argv.c || null
-  const queueId = argv.queue || argv.q || null
   // 若同時設定 enable與disable則以 disable生效
   let enable = null
   if (argv.disable) {
@@ -55,7 +51,7 @@ const getArgs = () => {
   }
   // socket args
   const port = argv.port || argv.p || null
-  const result = { hostId, channelId, queueId, port, enable }
+  const result = { port, enable }
   return result
 }
 module.exports = { loadConfig, createConfFolder, getArgs }
