@@ -6,7 +6,7 @@ module.exports = {
       id: 'config',
       path: path.resolve('./conf/index.yml'),
       default: {
-        name: 'apiserver',
+        name: 'dbmigration',
         version: '0.0',
         port: 3138,
         socket: {

@@ -1,7 +1,7 @@
 'use strict'
 // 操作mysql db的基本功能
 const mysql = require('mysql2/promise')
-const ORM = require(`./orm`)
+const ORM = require('./orm')
 // 建立資料庫
 const createDb = async(targetHost, targetDb, transaction = null) => {
   try {

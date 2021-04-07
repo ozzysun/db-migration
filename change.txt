@@ -4,3 +4,6 @@
 3.create db不存在 自動產生
 4.加入postman測試sample
 5.post 支援raw
+2021 04/07
+1.支援build pkg執行檔
+2.支援build docker container

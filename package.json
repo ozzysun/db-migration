@@ -2,9 +2,11 @@
   "name": "db-migration",
   "version": "0.0.1",
   "description": "manage multi db migration",
-  "main": "index.js",
+  "main": "src/index.js",
+  "bin": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
+    "build": "pkg package.json --out-dir output",
     "clean": "rimraf dist/*",
     "lint": "eslint --ext .js src/**/** tests/**/**",
     "lint-watch": "esw -w src/**/** tests/**/**",
@@ -16,6 +18,17 @@
   ],
   "author": "ozzysun@gmail.com",
   "license": "ISC",
+  "pkg": {
+    "scripts": [
+      "./src/core/**/**/*.js",
+      "./src/routes/**/**/*.js"
+    ],
+    "targets": [
+      "node12-macos-x64",
+      "node12-win-x64",
+      "node12-linux-x64"
+    ]
+  },
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-node": "^4.0.0",

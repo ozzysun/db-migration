@@ -1,2 +1,5 @@
 const { startServer } = require('./app')
-startServer()
+const run = async() => {
+  startServer()
+}
+run()
