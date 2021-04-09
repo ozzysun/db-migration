@@ -58,7 +58,7 @@ const createAPIServer = async(apiPort = 3138, staticPath = './public') => {
   router.use(beforeAfter)
   router.use(jwt)
   const server = app.listen(apiPort, () => {
-    console.log(`ozagent Start:${ip.address()}:${apiPort} ...ctr+c to stop service`)
+    console.log(`Start:${ip.address()}:${apiPort} ...ctr+c to stop service`)
   })
   return { router, app, server }
 }
