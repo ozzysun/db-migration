@@ -24,7 +24,7 @@ class RouteClass {
     return new ORM({ host, db })
   }
   commonMethod(method, uri, callback) {
-    uri = uri.indexOf('/') === 0 ? `/${this.ns}${uri}` : `/${this.ns}/${uri}`
+    if (typeof uri === 'string') uri = uri.indexOf('/') === 0 ? `/${this.ns}${uri}` : `/${this.ns}/${uri}`
     if (this.urlObj[method] === undefined) this.urlObj[method] = []
     this.urlObj[method].push(uri)
     if (method === 'post') {
